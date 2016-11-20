@@ -1,11 +1,145 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-a {
-  color: #00B7FF;
+body {
+  background: #F1F1F1;
 }
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a, a:hover {
+  text-decoration: none;
+  border: none;
+}
+
+
+
+/*MAIN NAVBAR*/
+.navbar {
+  font-family: "Roboto" sans-serif;
+  background: white;
+  height: 65px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 3em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/*BURGER LOGO*/
+.navbar i:first-child{
+  font-size: 1.3em;
+  opacity: .75;
+}
+/*YOUTUBE LOGO*/
+.yt-logo {
+  width: 150px;
+  height: auto;
+}
+
+/*NAVIGATION*/
+.navbar ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.navbar ul li {
+  display: inline-block;
+}
+
+/*Primary Search Bar*/
+.navbar form {
+  margin-left: 2em;
+  width: 70%;
+  position: relative;
+}
+
+.navbar input[type="text"]:focus {
+  box-shadow: inset 0 0 7px #0275D8;
+  border: 1.5px solid #0275D8;
+  outline: none;
+}
+
+.navbar input[type="text"] {
+  font-size: 20px;
+  font-weight: 550;
+  border: .5px solid rgba(0, 0, 0, 0.2);
+  padding: 3px;
+  padding-left: 10px;
+  width: 55%;
+  margin-left: 5%;
+}
+
+.navbar button[type="submit"] {
+  position: absolute;
+  background: white;
+  width: 75px;
+  padding: 6px;
+  border: .5px solid rgba(0, 0, 0, 0.2);
+  transition: .25s all;
+}
+.navbar button[type="submit"]:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.navbar button .fa-search {
+  font-size: 1.1em;
+}
+
+/*USER NAV*/
+.yt-user li {
+  margin-left: 1em;
+  border-radius: 3.5px;
+  font-size: .95em;
+  font-weight: 600;
+}
+
+.yt-user li a {
+  padding: 7px 12px;
+  display: block;
+}
+
+.yt-user .login, .yt-user .logout {
+  background: #167AC6;
+}
+
+.yt-user .login a, .yt-user .logout a {
+  color: white;
+}
+
+.yt-user .register, .yt-user .upload {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.yt-user .register a, .yt-user .upload a {
+  color: rgba(0, 0, 0, 0.75);
+}
+/*User Image*/
+.user img {
+  margin-left: 2em;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 ul.success li {
   padding: 15px;
@@ -14,6 +148,17 @@ ul.success li {
   border-radius: 4px;
   color: #3x763d;
   background: #dff0d8;
+  border-color: #d6e9c6;
+  list-style: none;
+}
+
+ul.error li {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #3x763d;
+  background: #ED1844;
   border-color: #d6e9c6;
   list-style: none;
 }

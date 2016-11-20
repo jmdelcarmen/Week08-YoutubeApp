@@ -10,25 +10,24 @@ router.get('/', (req, res, next) => {
 
     res.render('index', {
       title: 'Dashboard',
-      videos: videos
+      videos: videos,
+      user: req.user
     });
   });
-
-
 });
 
+router.get('/video/:id', (req, res) => {
+  Video.findById(req.params.id, (e, video) => {
+    if(e) throw e;
 
+    res.render('video', {
+      video: video,
+      comments: video.comments,
+      user: req.user
+    });
 
-
-
-
-
-
-
-
-
-
-
+  });
+});
 
 
 

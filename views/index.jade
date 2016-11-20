@@ -2,14 +2,21 @@ extends layout
 
 block content
   h1.text-xs-center.text-primary.py-3= title
-  p.lead Only awesome people here...
   if user
     p= user
     img(src="#{user.profileImage}" width="200px" height=" 200px")
   
-  div.container
+  div.container.col-xs-8
     each video, i in videos
-      div.col-xs-4 #{video}
-        video(controls width="300px" height="250px")
-          source(src="#{video.url}")
-      
+      div.col-xs-4.my-2 
+        h4 #{video.title}
+        p #{video.desc}
+        a(href="video/#{video._id}") 
+          video(width="300px" height="250px")
+            source(src="#{video.url}")
+        p.text-xs-center  
+          span Likes: #{video.likes}
+          span Views: #{video.views}
+        p Published: 
+          span #{video.published_at.toDateString()}
+      //- #{video}

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  div.row.my-2 
+    h4 #{video.title}
+    p #{video.desc}
+    video(controls width="800px" height="500px")
+      source(src="#{video.url}")
+    p.text-xs-center  
+      span Likes: #{video.likes}
+      span Views: #{video.views}
+    p Published: 
+      span #{video.published_at.toDateString()}
+      
+  div.row
+    h3 Comments
+    hr.row
+    each comment, i in comments
+      p hi
