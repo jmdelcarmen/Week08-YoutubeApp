@@ -1,9 +1,8 @@
+'use strict';
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 //access schema prop of mongoose
-const Schema = mongoose.Schema;
 //create instance of mongoose schema
-var userSchema = new Schema({
+let userSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
@@ -23,7 +22,8 @@ var userSchema = new Schema({
     type: String
   },
   profileImage: {
-    type: String
+    type: String,
+    default: 'uploads/default.jpg'
   },
   created_at: {type: Date, default: Date.now },
   //video objects
@@ -32,7 +32,4 @@ var userSchema = new Schema({
   favorites: {type: Array}
 });
 
-const User = mongoose.model('User', userSchema);
-
-//export the model/collection with the name of 'User'
-module.exports = User
+module.exports = mongoose.model('User', userSchema);

@@ -6,7 +6,6 @@ const expressValidator = require('express-validator');
 //passport stuff
 const session = require('express-session');
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const flash = require('connect-flash');
 //file upload
 const multer = require('multer');
@@ -48,8 +47,8 @@ app.use(passport.session());
 
 // validator
 app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
+  errorFormatter: (param, msg, value) => {
+      let namespace = param.split('.')
       , root    = namespace.shift()
       , formParam = root;
 
@@ -65,7 +64,7 @@ app.use(expressValidator({
 }));
 
 app.use(require('connect-flash')());
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
@@ -80,7 +79,7 @@ app.use('/users', users);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   let err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -92,7 +91,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -103,7 +102,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,

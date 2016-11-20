@@ -5,12 +5,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 
-//file upload
-const multer = require('multer');
-const upload = multer({dest: 'public/uploads'});
-
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) =>{
   res.render('index');
 });
 
@@ -23,12 +19,12 @@ router.route('/login')
     res.redirect('/');
   });
 
-  passport.serializeUser(function(user, done) {
+  passport.serializeUser((user, done) => {
     done(null, user.id);
   });
 
-  passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
       done(err, user);
     });
   });
@@ -54,22 +50,16 @@ router.route("/register")
     res.render('register', { title: 'Register' });
   })
   .post((req, res) => {
-    var name = req.body.name;
-    var email = req.body.email;
-    var username = req.body.username;
-    var password = req.body.password;
-    var password2 = req.body.password2;
-
+    // let password2 = req.body.password2;
     console.log(req.file);
-
     //if there is a file
     if (req.file) {
       console.log('Uploading File ...');
-      var profileImage = req.file.filename;
+      var profileImage = `/uploads/${req.file.filename}`;
       console.log(profileImage);
     } else {
+      var profileImage = '/uploads/default.jpg';
       console.log('No File Uploaded ...');
-      var profileImage = 'default.jpg';
     }
 
     console.log(profileImage);
@@ -86,11 +76,11 @@ router.route("/register")
       res.render('register', {errors: errors});
     } else {
       let newUser = new User({
-        name: name,
-        email: email,
-        username: username,
-        password: bcrypt.hashSync(password, 10),
-        profileImage: `uploads/${profileImage}`,
+        name: req.body.name,
+        email: req.body.email,
+        username: req.body.username,
+        password: bcrypt.hashSync(req.body.password, 10),
+        profileImage: profileImage
       });
       newUser.save();
     }
