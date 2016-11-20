@@ -1,0 +1,22 @@
+{
+  "name": "Youtube-Remake",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Marco <jmdc@my.codergv.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/jmdelcarmen/youtubeapp",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.5",
+    "angular": "^1.5.8",
+    "font-awesome": "^4.7.0"
+  }
+}
