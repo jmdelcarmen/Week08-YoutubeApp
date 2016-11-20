@@ -7,3 +7,9 @@ block content
     p= user
     img(src="#{user.profileImage}" width="200px" height=" 200px")
   
+  div.container
+    each video, i in videos
+      div.col-xs-4 #{video}
+        video(controls width="300px" height="250px")
+          source(src="#{video.url}")
+      

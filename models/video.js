@@ -10,12 +10,12 @@ let videoSchema = mongoose.Schema({
     title: {type: String},
     url: {type: String}
   },
-  published_at: {type: Date, default: Date.now},
+  published_at: {type: Date, default: new Date().toDateString()},
   tags: {type: Array},
   comments: [{
     username: {type: String},
     comment_body: {type: String},
-    comment_date: {type: Date, default: Date.now}
+    comment_date: {type: Date, default: new Date().toDateString()}
   }],
   views: {type: Number},
   likes: {type: Number}
