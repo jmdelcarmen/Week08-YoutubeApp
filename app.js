@@ -20,6 +20,7 @@ const db = mongoose.connect(dbSource);
 //routes
 const routes = require('./routes/index');
 const users = require('./routes/users');
+const videos = require('./routes/videos');
 
 //initialize app
 const app = express();
@@ -34,7 +35,7 @@ app.use(multer({dest: 'public/uploads'}).single('profileImage'));
 // uncomment after placing your favicon in /public
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //handle sessions
@@ -79,6 +80,7 @@ app.get('*', (req, res, next) => {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/videos', videos);
 
 
 // catch 404 and forward to error handler

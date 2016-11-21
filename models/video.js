@@ -13,6 +13,7 @@ let videoSchema = mongoose.Schema({
   published_at: {type: Date, default: new Date().toDateString()},
   tags: {type: Array},
   comments: [{
+    //add user object
     username: {type: String},
     comment_body: {type: String},
     comment_date: {type: Date, default: new Date().toDateString()}

@@ -96,4 +96,13 @@ router.get('/logout', (req, res) => {
 });
 
 
+router.route("/upload")
+  .get((req, res) => {
+    res.render('user/upload');
+  })
+  .post((req, res) => {
+    // console.log(req.body);
+  });
+
+
 module.exports = router;

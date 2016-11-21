@@ -4,6 +4,10 @@ const User = require('../models/user');
 const Video = require('../models/video');
 
 /* GET home page. */
+
+
+
+
 router.get('/', (req, res, next) => {
   Video.find({}, (e, videos) => {
     if(e) throw e;
@@ -28,6 +32,15 @@ router.get('/video/:id', (req, res) => {
 
 
 
+router.post('/video/upload', (req, res, next) => {
+  console.log(req.body);
+  console.log('hi there');
+});
+
+
+
+
+
 function ensureAuthenticated (req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -35,5 +48,8 @@ function ensureAuthenticated (req, res, next) {
     res.redirect('/users/login');
   }
 };
+
+
+
 
 module.exports = router;
