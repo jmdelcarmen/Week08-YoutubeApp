@@ -14,7 +14,7 @@ html
         img.yt-logo(src="https://www.youtube.com/yt/brand/media/image/YouTube-logo-full_color.png")
       
       form(method="post" action="search")
-        input(type="text" name="search" placeholder="Search" autofocus)
+        input(type="text" name="search" placeholder="Search")
         button(type="submit")
           i.fa.fa-search
           
@@ -32,9 +32,9 @@ html
             a(href="/users/upload") Upload 
           li.logout
             a(href="/users/logout") Logout    
-      if user
-        a(href="/users/user").user
-          img(src="../#{user.profileImage}")
+        if user
+          a(href="/users/user").user
+            img(src="../#{user.profileImage}")
           
             
             

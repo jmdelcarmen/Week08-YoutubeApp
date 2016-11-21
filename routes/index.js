@@ -10,8 +10,7 @@ router.get('/', (req, res, next) => {
 
     res.render('index', {
       title: 'Dashboard',
-      videos: videos,
-      user: req.user
+      videos: videos
     });
   });
 });
@@ -22,10 +21,8 @@ router.get('/video/:id', (req, res) => {
 
     res.render('video', {
       video: video,
-      comments: video.comments,
-      user: req.user
+      comments: video.comments
     });
-
   });
 });
 

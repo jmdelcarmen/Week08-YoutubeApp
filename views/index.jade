@@ -14,9 +14,9 @@ block content
         a(href="video/#{video._id}") 
           video(width="300px" height="250px")
             source(src="#{video.url}")
-        p.text-xs-center  
+        div.text-xs-center  
           span Likes: #{video.likes}
           span Views: #{video.views}
-        p Published: 
+        div Published: 
           span #{video.published_at.toDateString()}
       //- #{video}
