@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -7,7 +9,7 @@ const expressValidator = require('express-validator');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
-const passport_config = require('./routes/passport');
+const passport_config = require('./routes/passport_config');
 //file upload
 const multer = require('multer');
 //db stuff
@@ -24,7 +26,6 @@ const videos = require('./routes/videos');
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //handle file upload
@@ -84,31 +85,8 @@ app.post('/users/login', passport.authenticate('local', {failureRedirect: '/user
 app.get('/users/register', users.displayRegister);
 app.post('/users/register', users.registerUser);
 app.get('/users/logout', users.logoutUser);
-// app.use('/users', users);
-// app.use('/videos', videos);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.get('/videos/upload', videos.displayUpload);
+app.post('/videos/upload', passport_config.ensureAuthenticated,videos.uploadVideo);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

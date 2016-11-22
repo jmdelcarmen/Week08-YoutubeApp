@@ -10,7 +10,6 @@ module.exports.displayLogin = (req, res) => {
 }
 
 module.exports.loginUser = (req, res, next) => {
-  console.log(req.user);
   req.flash('success', 'You are now logged in');
   res.redirect('/');
 }
@@ -22,11 +21,7 @@ module.exports.displayRegister = (req, res) => {
 module.exports.registerUser = (req, res) => {
   //set default profile image
   let profileImage = '';
-  req.file ? profileImage = "./uploads/" + req.file.filename : profileImage = "uploads/default.jpg";
-  //handle error for password confirmation
-  if (req.body.password !== req.body.password2) {
-    req.flash('error', 'Confirm-password does not match given password.');
-  }
+  req.file ? profileImage = "./uploads/" + req.file.filename : profileImage = "./uploads/default.jpg";
 
   // Form validator
   req.checkBody('name', 'Name field is required').notEmpty();
@@ -34,12 +29,15 @@ module.exports.registerUser = (req, res) => {
   req.checkBody('username', 'Username field is required').notEmpty();
   req.checkBody('password', 'Password field is required').notEmpty();
   req.checkBody('password2', 'Confirm-password field is required').notEmpty();
-
   // Check for errors
   let errors = req.validationErrors();
 
   if (errors) {
     res.render('register', {errors: errors});
+  } else if (req.body.password !== req.body.password2) {
+    //handle error for password confirmation
+    req.flash('error', 'Confirm-password does not match given password.');
+    res.redirect('/users/register');
   } else {
     var newUser = new User({
       name: req.body.name,
@@ -48,9 +46,10 @@ module.exports.registerUser = (req, res) => {
       password: bcrypt.hashSync(req.body.password, 10),
       profileImage: profileImage
     });
+
     newUser.save((e, data) => {
       if(e) {
-        req.flash('error', 'Username or Email already exists.');
+        req.flash('error', e.message);
         res.redirect('/users/register');
       } else {
         req.flash('success', 'You are now registered and can login.');

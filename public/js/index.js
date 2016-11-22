@@ -6,7 +6,6 @@ function getUploadData (dataObject) {
   videoData.url = dataObject.url;
 }
 
-
 $('#upload').on('click', function (e) {
   //prevent form submission
   e.preventDefault();
