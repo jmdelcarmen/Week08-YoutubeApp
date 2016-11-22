@@ -11,7 +11,6 @@ let userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    unique: true,
     required: true
   },
   email: {
@@ -23,14 +22,17 @@ let userSchema = new mongoose.Schema({
     type: String
   },
   profileImage: {
-    type: String,
-    default: 'uploads/default.jpg'
+    type: String
   },
   created_at: {type: Date, default: Date.now },
   //video objects
   videoUploads: {type: Array},
   //path to videos
-  favorites: {type: Array}
+  favorites: {type: Array},
+  _v: {
+    type: Number,
+    unique: true
+  }
 });
 
 module.exports = mongoose.model('User', userSchema);

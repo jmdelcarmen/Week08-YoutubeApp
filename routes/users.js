@@ -44,25 +44,15 @@ router.route('/login')
     }
   ));
 
-
 router.route("/register")
   .get((req, res) => {
     res.render('register', { title: 'Register' });
   })
   .post((req, res) => {
-    // let password2 = req.body.password2;
-    console.log(req.file);
-    //if there is a file
-    if (req.file) {
-      console.log('Uploading File ...');
-      var profileImage = `/uploads/${req.file.filename}`;
-      console.log(profileImage);
-    } else {
-      var profileImage = '/uploads/default.jpg';
-      console.log('No File Uploaded ...');
-    }
+    //set default profile image
+    var profileImage = '';
+    req.file ? profileImage = "./uploads/" + req.file.filename : profileImage = "uploads/default.jpg"
 
-    console.log(profileImage);
     // Form validator
     req.checkBody('name', 'Name field is required').notEmpty();
     req.checkBody('email', 'Email field is required').isEmail();
@@ -70,23 +60,29 @@ router.route("/register")
     req.checkBody('password', 'Password field is required').notEmpty();
     req.checkBody('password2', 'Confirm-password field is required').notEmpty();
 
-    // Check errors
+    // Check for errors
     let errors = req.validationErrors();
+
     if (errors) {
       res.render('register', {errors: errors});
     } else {
-      let newUser = new User({
+      var newUser = new User({
         name: req.body.name,
         email: req.body.email,
         username: req.body.username,
         password: bcrypt.hashSync(req.body.password, 10),
         profileImage: profileImage
       });
-      newUser.save();
+      newUser.save((e, data) => {
+        if(e) {
+          req.flash('error', 'Username or Email already exists.');
+          res.redirect('/users/register');
+        } else {
+          req.flash('success', 'You are now registered and can login.');
+          res.redirect('/');
+        }
+      });
     }
-    req.flash('success', 'You are now registered and can login.');
-    res.location('/');
-    res.redirect('/');
   });
 
 router.get('/logout', (req, res) => {
@@ -95,14 +91,6 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-
-router.route("/upload")
-  .get((req, res) => {
-    res.render('user/upload');
-  })
-  .post((req, res) => {
-    // console.log(req.body);
-  });
 
 
 module.exports = router;

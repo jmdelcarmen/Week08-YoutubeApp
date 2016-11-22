@@ -9,7 +9,6 @@ const passport = require('passport');
 const flash = require('connect-flash');
 //file upload
 const multer = require('multer');
-const upload = multer({dest: 'public/uploads'});
 //db stuff
 require('dotenv').config();
 const mongoose = require('mongoose');
@@ -31,8 +30,6 @@ app.set('view engine', 'jade');
 
 //handle file upload
 app.use(multer({dest: 'public/uploads'}).single('profileImage'));
-
-// uncomment after placing your favicon in /public
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -78,9 +75,32 @@ app.get('*', (req, res, next) => {
   next();
 });
 
+
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/videos', videos);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // catch 404 and forward to error handler
@@ -89,7 +109,6 @@ app.use((req, res, next) => {
   err.status = 404;
   next(err);
 });
-
 
 // error handlers
 

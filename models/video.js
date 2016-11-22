@@ -18,8 +18,8 @@ let videoSchema = mongoose.Schema({
     comment_body: {type: String},
     comment_date: {type: Date, default: new Date().toDateString()}
   }],
-  views: {type: Number},
-  likes: {type: Number}
+  views: {type: Number, default: 0},
+  likes: {type: Number, default: 0}
 });
 
 module.exports = mongoose.model('Video', videoSchema);

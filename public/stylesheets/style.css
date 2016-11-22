@@ -136,9 +136,6 @@ a, a:hover {
 
 
 
-
-
-
 ul.success li {
   padding: 15px;
   margin-bottom: 20px;
@@ -155,8 +152,9 @@ ul.error li {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
-  color: #3x763d;
-  background: #ED1844;
+  color: #fff;
+  text-align: center;
+  background: #D22827;
   border-color: #d6e9c6;
   list-style: none;
 }

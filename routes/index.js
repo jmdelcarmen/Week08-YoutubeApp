@@ -6,8 +6,6 @@ const Video = require('../models/video');
 /* GET home page. */
 
 
-
-
 router.get('/', (req, res, next) => {
   Video.find({}, (e, videos) => {
     if(e) throw e;
@@ -36,10 +34,6 @@ router.post('/video/upload', (req, res, next) => {
   console.log(req.body);
   console.log('hi there');
 });
-
-
-
-
 
 function ensureAuthenticated (req, res, next) {
   if (req.isAuthenticated()) {

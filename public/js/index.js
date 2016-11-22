@@ -1,22 +1,19 @@
 'use strict';
 
-////TESTING CLIENT-SERVER/////
-
-
-var videoData = {};
+let videoData = {};
 
 function getUploadData (dataObject) {
   videoData.url = dataObject.url;
 }
 
-$('#upload').on('click', function (e) {
-  e.preventDefault();
 
+$('#upload').on('click', function (e) {
+  //prevent form submission
+  e.preventDefault();
   videoData.title = $('#videoTitle').val();
   videoData.desc = $('#videoDesc').val();
   videoData.published_at = new Date().toDateString();
-
-  console.log(videoData);
+  //Send data to server
   $.ajax({
     url: '/videos/upload',
     type: 'POST',
@@ -26,6 +23,9 @@ $('#upload').on('click', function (e) {
       console.log('Data sent to server');
     }
   });
+
+  window.location.href = '/';
+
 });
 
 //

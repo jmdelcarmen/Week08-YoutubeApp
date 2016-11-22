@@ -4,7 +4,7 @@ block content
   hr.mt-3
   form
     label Title
-    input(name="title" type="text" id="videoTitle")
-    textarea(id="videoDesc")
+    input(name="title" type="text" id="videoTitle" required)
+    textarea(id="videoDesc" required)
     input(type='filepicker', data-fp-apikey='AidhEA8EOS6RJEFfygsngz', onchange='getUploadData(event.fpfile)')
     button(type="submit" id="upload") Upload
