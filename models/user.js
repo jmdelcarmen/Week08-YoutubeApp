@@ -1,8 +1,7 @@
 'use strict';
 
 const mongoose = require('mongoose');
-//access schema prop of mongoose
-//create instance of mongoose schema
+
 let userSchema = new mongoose.Schema({
   username: {
     type: String,

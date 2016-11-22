@@ -7,15 +7,14 @@ const expressValidator = require('express-validator');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
+const passport_config = require('./routes/passport');
 //file upload
 const multer = require('multer');
 //db stuff
 require('dotenv').config();
 const mongoose = require('mongoose');
-var dbSource ='mongodb://localhost/customers' ||  process.env.MONGO_URI;
+const dbSource ='mongodb://localhost/customers' ||  process.env.MONGO_URI;
 const db = mongoose.connect(dbSource);
-
-
 //routes
 const routes = require('./routes/index');
 const users = require('./routes/users');
@@ -41,11 +40,13 @@ app.use(session({
   saveUninitialized: true,
   resave: true
 }));
-
 //passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
+//passport configuration
+//serializeUser
+//deserializeUser
+passport_config();
 // validator
 app.use(expressValidator({
   errorFormatter: (param, msg, value) => {
@@ -76,10 +77,16 @@ app.get('*', (req, res, next) => {
 });
 
 
+app.get('/', routes.dashboard);
+app.get('/video/:id', routes.displayVideo);
+app.get('/users/login', users.displayLogin);
+app.post('/users/login', passport.authenticate('local', {failureRedirect: '/users/login', failureFlash: 'Invalid Username or Password'}), users.loginUser);
+app.get('/users/register', users.displayRegister);
+app.post('/users/register', users.registerUser);
+app.get('/users/logout', users.logoutUser);
+// app.use('/users', users);
+// app.use('/videos', videos);
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/videos', videos);
 
 
 
