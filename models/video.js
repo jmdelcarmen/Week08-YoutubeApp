@@ -6,17 +6,17 @@ let videoSchema = mongoose.Schema({
   url: {type: String, unique: true},
   title: {type: String},
   desc: {type: String},
-  channel: {
-    title: {type: String},
-    url: {type: String}
+  publisher: {
+    username: {type: String},
+    profileImage: {type: String}
   },
-  published_at: {type: Date, default: new Date().toDateString()},
-  tags: {type: Array},
+  published_at: {type: Date, default: Date.now},
+  category: {type: String},
   comments: [{
     //add user object
     username: {type: String},
     comment_body: {type: String},
-    comment_date: {type: Date, default: new Date().toDateString()}
+    comment_date: {type: Date, default: Date.now}
   }],
   views: {type: Number, default: 0},
   likes: {type: Number, default: 0}

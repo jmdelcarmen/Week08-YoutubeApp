@@ -7,8 +7,22 @@ module.exports.displayUpload = (req, res) => {
 }
 
 module.exports.uploadVideo = (req, res) => {
-  new Video(req.body).save((e) => {
-    if(e) throw e;
-    console.log('Video uploaded');
+  new Video({
+    url: req.body.url,
+    title: req.body.title,
+    desc: req.body.desc,
+    category: req.body.category,
+    publisher: {
+      username: req.user.username,
+      profileImage: req.user.profileImage
+    },
+    published_at: req.body.published_at
+  }).save((e) => {
+    if(e) {
+      req.flash('error', 'Failed to upload video.');
+      res.redirect('/users/upload');
+    } else {
+      console.log('Video uploaded');
+    }
   });
 }

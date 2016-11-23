@@ -85,8 +85,8 @@ app.post('/users/login', passport.authenticate('local', {failureRedirect: '/user
 app.get('/users/register', users.displayRegister);
 app.post('/users/register', users.registerUser);
 app.get('/users/logout', users.logoutUser);
-app.get('/videos/upload', videos.displayUpload);
-app.post('/videos/upload', passport_config.ensureAuthenticated,videos.uploadVideo);
+app.get('/videos/upload', passport_config.ensureAuthenticated, videos.displayUpload);
+app.post('/videos/upload', passport_config.ensureAuthenticated, videos.uploadVideo);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
