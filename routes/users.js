@@ -21,7 +21,7 @@ module.exports.displayRegister = (req, res) => {
 module.exports.registerUser = (req, res) => {
   //set default profile image
   let profileImage = '';
-  req.file ? profileImage = "./uploads/" + req.file.filename : profileImage = "./uploads/default.jpg";
+  req.file ? profileImage = "/uploads/" + req.file.filename : profileImage = "/uploads/default.jpg";
 
   // Form validator
   req.checkBody('name', 'Name field is required').notEmpty();

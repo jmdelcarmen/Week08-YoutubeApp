@@ -15,6 +15,11 @@ module.exports.dashboard = (req, res, next) => {
 
 //Display single video
 module.exports.displayVideo = (req, res) => {
+  Video.findByIdAndUpdate(req.params.id, {$inc: {views: 1}}, (e, video) => {
+    if (e) console.log(e.message);
+    console.log('Video viewed.');
+  });
+
   let publicVideos = [];
   Video.find({}, (err, videos) => {
     if (err) req.flash('error', 'Fail to load videos.');
@@ -22,7 +27,7 @@ module.exports.displayVideo = (req, res) => {
     Video.findById(req.params.id, (err, video) => {
       if(err) req.flash('error', 'Fail to load video.');
       res.render('video', {
-        video: video,
+        mainVideo: video,
         publicVideos: publicVideos
       });
     });

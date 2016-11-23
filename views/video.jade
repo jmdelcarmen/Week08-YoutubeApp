@@ -1,36 +1,63 @@
 extends layout
 
 block content
-  div.row.px-3
-    div.col-lg-7
-      h4 #{video.title}
-      p #{video.desc}
-      video(controls width="800px" height="500px")
-        source(src="#{video.url}")
-      p.text-xs-center  
-        span Likes: #{video.likes}
-        span Views: #{video.views}
-      p Published: 
-        span #{video.published_at.toDateString()}    
-      h3 Comments
-      hr.row
-      each comment, i in video.comments
-        p #{comment.comment_body}
+
+  div.row.wrapper
+  
+    //- Main video column
+    div.col-lg-8.primary-video-col
+      div#featured
+        video(controls width="100%")
+          source(src="#{mainVideo.url}")
+        
+      div#videoBar.mt-2
+        h3.my-2 #{mainVideo.title}
+        a(href="#").user
+          img(src="/#{mainVideo.publisher.profileImage}")    
+        span.username #{mainVideo.publisher.username}
+        hr
+        div.text-xs-right
+          i.fa.fa-thumbs-o-up
+          span Likes: #{mainVideo.likes}
+          i.fa.fa-eye
+          span Views: #{mainVideo.views}
+        
+      //- Video Description
+      div#videoBar2.mt-2
+        strong
+          p Published on 
+            span #{mainVideo.published_at.toDateString().slice(3).replace(' 20', ', 20')}    
+        p #{mainVideo.desc}
+        hr
+        p.text-xs-center 
+          strong Show more
       
-    div.col-lg-5
-      h3 Videos
-      hr.row
+      
+      //- Comments section
+      div#commentsBar.my-2
+        span.lead.pl-2 Comments - #{mainVideo.comments.length}
+        hr
+        //do some angular stuff for adding comments
+        div.row
+          each comment, i in mainVideo.comments
+            p #{comment.comment_body}
+            
+      
+      
+    //- Public video column
+    div.col-lg-4.bg-primary
       h1 Public Videos
       each publicVideo, i in publicVideos
-        div.col-xs-8.my-2 
-          h4 #{publicVideo.title}
-          p #{publicVideo.desc}
-          a(href="/video/#{publicVideo._id}") 
-            video(width="300px" height="250px")
-              source(src="#{publicVideo.url}")
-          div.text-xs-center  
-            span Likes: #{publicVideo.likes}
-            span Views: #{publicVideo.views}
-          div Published: 
-            span #{publicVideo.published_at.toDateString()}
+        if (publicVideo.url !== mainVideo.url)
+          div.col-xs-8
+            h4 #{publicVideo.title}
+            p #{publicVideo.desc}
+            a(href="/video/#{publicVideo._id}") 
+              video(width="100%")
+                source(src="#{publicVideo.url}")
+            div.text-xs-center  
+              span Likes: #{publicVideo.likes}
+              span Views: #{publicVideo.views}
+            div Published: 
+              span #{publicVideo.published_at.toDateString()}
         

@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 let videoSchema = mongoose.Schema({
-  url: {type: String, unique: true},
+  url: {type: String, unique: true, required: true},
   title: {type: String},
   desc: {type: String},
   publisher: {
