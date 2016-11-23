@@ -79,6 +79,7 @@ app.get('*', (req, res, next) => {
 
 
 app.get('/', routes.dashboard);
+app.post('/video/addcomment/:id', routes.addcomment);
 app.get('/video/:id', routes.displayVideo);
 app.get('/users/login', users.displayLogin);
 app.post('/users/login', passport.authenticate('local', {failureRedirect: '/users/login', failureFlash: 'Invalid Username or Password'}), users.loginUser);

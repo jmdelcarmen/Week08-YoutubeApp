@@ -13,8 +13,8 @@ let videoSchema = mongoose.Schema({
   published_at: {type: Date, default: Date.now},
   category: {type: String},
   comments: [{
-    //add user object
     username: {type: String},
+    profileImage: {type: String},
     comment_body: {type: String},
     comment_date: {type: Date, default: Date.now}
   }],

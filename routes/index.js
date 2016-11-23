@@ -13,7 +13,7 @@ module.exports.dashboard = (req, res, next) => {
   });
 }
 
-//Display single video
+//Display main video
 module.exports.displayVideo = (req, res) => {
   Video.findByIdAndUpdate(req.params.id, {$inc: {views: 1}}, (e, video) => {
     if (e) console.log(e.message);
@@ -21,15 +21,33 @@ module.exports.displayVideo = (req, res) => {
   });
 
   let publicVideos = [];
+  //get all videos
   Video.find({}, (err, videos) => {
     if (err) req.flash('error', 'Fail to load videos.');
     publicVideos = videos;
+    //get main video
     Video.findById(req.params.id, (err, video) => {
       if(err) req.flash('error', 'Fail to load video.');
       res.render('video', {
         mainVideo: video,
-        publicVideos: publicVideos
+        publicVideos: publicVideos,
+        user: req.user
       });
     });
   });
+}
+
+module.exports.addcomment = (req, res) => {
+  if (req.user) {
+    Video.findOneAndUpdate({_id: req.params.id}, {$push: {comments: {comment_body: req.body.comment_body, comment_date: new Date(), username: req.user.username, profileImage: req.user.profileImage}}},(err, video) => {
+      if (err) {
+        res.status(500).send('Failed to add comment');
+      }
+      req.flash('success', 'Comment added');
+      res.redirect(`/video/${req.params.id}`);
+    });
+  } else {
+    req.flash('error', 'Please sign in to leave a comment.');
+    res.redirect('/users/login');
+  }
 }

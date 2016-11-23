@@ -158,6 +158,48 @@ a, a:hover {
 }
 
 
+/*Video Comments Bar*/
+#commentsBar .form-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row wrap;
+  padding-left: 3%;
+}
+
+#commentsBar img {
+  border-radius: 4px;
+  height: 70px;
+  width: 70px;
+}
+
+#commentsBar textarea {
+  font-size: 1.1em;
+  border: .75px solid rgba(0, 0, 0, 0.2);
+  margin-left: 2%;
+  width: 90%;
+  height: 75px;
+  padding: .75em;
+}
+
+.comment-container {
+  /*background: red;*/
+  display: flex;
+}
+
+/*.comment-container #comment-username {
+  align-self: flex-start;
+}*/
+
+.comment-container img {
+  display: inline-block;
+}
+
+
+
+
+
+
 
 
 
@@ -172,6 +214,7 @@ ul.success li {
   background: #5CB860;
   border-color: #d6e9c6;
   list-style: none;
+  opacity: .75;
 }
 
 ul.error li {
@@ -184,4 +227,5 @@ ul.error li {
   background: #D22827;
   border-color: #d6e9c6;
   list-style: none;
+  opacity: .75;
 }

@@ -26,7 +26,7 @@ block content
       div#videoBar2.mt-2
         strong
           p Published on 
-            span #{mainVideo.published_at.toDateString().slice(3).replace(' 20', ', 20')}    
+            span #{mainVideo.published_at.toDateString().slice(3).replace(' 201', ', 201')}    
         p #{mainVideo.desc}
         hr
         p.text-xs-center 
@@ -39,8 +39,27 @@ block content
         hr
         //do some angular stuff for adding comments
         div.row
-          each comment, i in mainVideo.comments
-            p #{comment.comment_body}
+        form(method="post" action="/video/addcomment/#{mainVideo._id}")
+          .form-group
+            a(href="#").user
+              if user
+                img(src="/#{user.profileImage}")  
+              if !user
+                img(src="/uploads/default.jpg")  
+            textarea(name="comment_body" placeholder="Add a public comment...")
+          .form-group 
+            button(type="submit") Comment
+            
+          //- Display all comments
+          each comment, i in mainVideo.comments.reverse()
+            div.comment-container.py-2
+              //- a(href="/#{comment}") profile page
+              img(src="/#{comment.profileImage}")
+              strong.mx-1
+                span#comment-username #{comment.username}
+              span #{comment.comment_date.toDateString().slice(3).replace(' 201', ', 201')}
+            p.py-1.px-1 #{comment.comment_body}
+              hr
             
       
       
