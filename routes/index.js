@@ -15,12 +15,16 @@ module.exports.dashboard = (req, res, next) => {
 
 //Display single video
 module.exports.displayVideo = (req, res) => {
-  Video.findById(req.params.id, (e, video) => {
-    if(e) req.flash('error', 'Could not load video.');
-
-    res.render('video', {
-      video: video,
-      comments: video.comments
+  let publicVideos = [];
+  Video.find({}, (err, videos) => {
+    if (err) req.flash('error', 'Fail to load videos.');
+    publicVideos = videos;
+    Video.findById(req.params.id, (err, video) => {
+      if(err) req.flash('error', 'Fail to load video.');
+      res.render('video', {
+        video: video,
+        publicVideos: publicVideos
+      });
     });
   });
 }

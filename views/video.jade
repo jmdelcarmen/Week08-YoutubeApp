@@ -1,19 +1,36 @@
 extends layout
 
 block content
-  div.row.my-2 
-    h4 #{video.title}
-    p #{video.desc}
-    video(controls width="800px" height="500px")
-      source(src="#{video.url}")
-    p.text-xs-center  
-      span Likes: #{video.likes}
-      span Views: #{video.views}
-    p Published: 
-      span #{video.published_at.toDateString()}
+  div.row.px-3
+    div.col-lg-7
+      h4 #{video.title}
+      p #{video.desc}
+      video(controls width="800px" height="500px")
+        source(src="#{video.url}")
+      p.text-xs-center  
+        span Likes: #{video.likes}
+        span Views: #{video.views}
+      p Published: 
+        span #{video.published_at.toDateString()}    
+      h3 Comments
+      hr.row
+      each comment, i in video.comments
+        p #{comment.comment_body}
       
-  div.row
-    h3 Comments
-    hr.row
-    each comment, i in comments
-      p hi
+    div.col-lg-5
+      h3 Videos
+      hr.row
+      h1 Public Videos
+      each publicVideo, i in publicVideos
+        div.col-xs-8.my-2 
+          h4 #{publicVideo.title}
+          p #{publicVideo.desc}
+          a(href="/video/#{publicVideo._id}") 
+            video(width="300px" height="250px")
+              source(src="#{publicVideo.url}")
+          div.text-xs-center  
+            span Likes: #{publicVideo.likes}
+            span Views: #{publicVideo.views}
+          div Published: 
+            span #{publicVideo.published_at.toDateString()}
+        

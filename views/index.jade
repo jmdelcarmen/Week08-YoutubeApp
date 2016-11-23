@@ -11,7 +11,7 @@ block content
       div.col-xs-4.my-2 
         h4 #{video.title}
         p #{video.desc}
-        a(href="video/#{video._id}") 
+        a(href="/video/#{video._id}") 
           video(width="300px" height="250px")
             source(src="#{video.url}")
         div.text-xs-center  
