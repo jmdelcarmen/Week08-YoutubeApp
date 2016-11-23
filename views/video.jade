@@ -2,10 +2,8 @@ extends layout
 
 block content
 
-  div.row.wrapper
-  
     //- Main video column
-    div.col-lg-8.primary-video-col
+    div.col-lg-8.primary-video-col.mt-2
       div#featured
         video(controls width="100%")
           source(src="#{mainVideo.url}")
@@ -52,7 +50,7 @@ block content
             
           //- Display all comments
           each comment, i in mainVideo.comments.reverse()
-            div.comment-container.py-2
+            div.comment-container.py-2.px-1
               //- a(href="/#{comment}") profile page
               img(src="/#{comment.profileImage}")
               strong.mx-1
@@ -63,20 +61,16 @@ block content
             
       
       
-    //- Public video column
-    div.col-lg-4.bg-primary
-      h1 Public Videos
+      //- Public video column
+    div.col-lg-4.secondary-video-col.mt-2
       each publicVideo, i in publicVideos
         if (publicVideo.url !== mainVideo.url)
-          div.col-xs-8
-            h4 #{publicVideo.title}
-            p #{publicVideo.desc}
-            a(href="/video/#{publicVideo._id}") 
-              video(width="100%")
-                source(src="#{publicVideo.url}")
-            div.text-xs-center  
-              span Likes: #{publicVideo.likes}
-              span Views: #{publicVideo.views}
-            div Published: 
-              span #{publicVideo.published_at.toDateString()}
-        
+          div.publicvideo-container
+            a(href="/video/#{publicVideo._id}").video
+              video(width="100px")
+                source(src="#{publicVideo.url}")      
+            div.px-1
+              h5 #{publicVideo.title}
+              p Views: #{publicVideo.views}
+          hr  
+            

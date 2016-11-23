@@ -4,6 +4,7 @@
 
 body {
   background: #F1F1F1;
+  padding-top: 65px;
 }
 
 ul, ol {
@@ -19,12 +20,17 @@ a, a:hover {
 
 
 
+
+
 /*MAIN NAVBAR*/
 .navbar {
+  top: 0;
   font-family: "Roboto" sans-serif;
   background: white;
   height: 65px;
-  position: relative;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -129,12 +135,6 @@ a, a:hover {
   align-self: flex-end;
 }
 
-.wrapper {
-  padding: 2em;
-  display: flex;
-  justify-content: space-between;
-  flex-flow: row wrap;
-}
 
 .primary-video-col #featured {
   display: inline-block;
@@ -156,7 +156,6 @@ a, a:hover {
   font-size: 1.2em;
   margin-left: .5em;
 }
-
 
 /*Video Comments Bar*/
 #commentsBar .form-group {
@@ -187,13 +186,42 @@ a, a:hover {
   display: flex;
 }
 
-/*.comment-container #comment-username {
-  align-self: flex-start;
-}*/
-
 .comment-container img {
   display: inline-block;
 }
+
+
+.secondary-video-col {
+  background: white;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+.secondary-video-col .publicvideo-container {
+  margin: 1em;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
+.secondary-video-col .publicvideo-container video {
+  width: 250px;
+}
+
+.secondary-video-col .publicvideo-container h4 {
+  align-self: flex-start;
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
