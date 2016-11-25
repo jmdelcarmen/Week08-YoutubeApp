@@ -20,7 +20,7 @@ let videoSchema = mongoose.Schema({
   }],
   views: {type: Number, default: 0},
   likes: {type: Number, default: 0},
-  liked_users: {type: Array, unique: true}
+  liked_users: {type: Array}
 });
 
 module.exports = mongoose.model('Video', videoSchema);
