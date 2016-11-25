@@ -29,7 +29,7 @@ let userSchema = new mongoose.Schema({
   //path to videos
   favorites: [{
     video_title: {type: String},
-    video_url: {type: String, unique: true}
+    video_url: {type: String}
   }]
 });
 

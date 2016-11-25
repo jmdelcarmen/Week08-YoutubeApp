@@ -15,7 +15,7 @@ const multer = require('multer');
 //db stuff
 require('dotenv').config();
 const mongoose = require('mongoose');
-const dbSource ='mongodb://localhost/customers' ||  process.env.MONGO_URI;
+const dbSource = process.env.MONGO_URI;
 const db = mongoose.connect(dbSource);
 //routes
 const routes = require('./routes/index');
