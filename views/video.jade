@@ -1,7 +1,6 @@
 extends layout
 
 block content
-
     //- Main video column
     div.col-lg-8.primary-video-col.mt-2
       div#featured
@@ -15,7 +14,7 @@ block content
         span.username #{mainVideo.publisher.username}
         hr
         div.text-xs-right
-          a(href="/video/favorite/#{mainVideo._id}")
+          a(href="/video/like/#{mainVideo._id}")
             i.fa.fa-thumbs-o-up
             span Likes: #{mainVideo.likes}
           i.fa.fa-eye
@@ -61,8 +60,6 @@ block content
             p.py-1.px-1 #{comment.comment_body}
               hr
           
-      
-      
       //- Public video column
     div.col-lg-4.secondary-video-col.mt-2
       each publicVideo, i in publicVideos
@@ -75,4 +72,3 @@ block content
               h5 #{publicVideo.title}
               p Views: #{publicVideo.views}
           hr  
-            

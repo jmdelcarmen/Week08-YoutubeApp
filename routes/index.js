@@ -52,8 +52,7 @@ module.exports.addcomment = (req, res) => {
   }
 }
 
-
-module.exports.addToFavorites = (req, res) => {
+module.exports.likeVideo = (req, res) => {
 //fetch video and add a like
   Video.findOne({_id: req.params.id}, (err, video) => {
     if (err) {

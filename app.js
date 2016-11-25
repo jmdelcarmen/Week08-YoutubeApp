@@ -80,7 +80,7 @@ app.get('*', (req, res, next) => {
 
 app.get('/', routes.dashboard);
 app.get('/video/:id', routes.displayVideo);
-app.get('/video/favorite/:id', passport_config.ensureAuthenticated, routes.addToFavorites);
+app.get('/video/like/:id', passport_config.ensureAuthenticated, routes.likeVideo);
 app.post('/video/addcomment/:id', routes.addcomment);
 app.get('/users/login', users.displayLogin);
 app.post('/users/login', passport.authenticate('local', {failureRedirect: '/users/login', failureFlash: 'Invalid Username or Password'}), users.loginUser);
