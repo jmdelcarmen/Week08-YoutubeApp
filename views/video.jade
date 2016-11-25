@@ -15,8 +15,9 @@ block content
         span.username #{mainVideo.publisher.username}
         hr
         div.text-xs-right
-          i.fa.fa-thumbs-o-up
-          span Likes: #{mainVideo.likes}
+          a(href="/video/favorite/#{mainVideo._id}")
+            i.fa.fa-thumbs-o-up
+            span Likes: #{mainVideo.likes}
           i.fa.fa-eye
           span Views: #{mainVideo.views}
         
@@ -37,18 +38,19 @@ block content
         hr
         //do some angular stuff for adding comments
         div.row
-        form(method="post" action="/video/addcomment/#{mainVideo._id}")
-          .form-group
-            a(href="#").user
-              if user
-                img(src="/#{user.profileImage}")  
-              if !user
-                img(src="/uploads/default.jpg")  
-            textarea(name="comment_body" placeholder="Add a public comment...")
-          .form-group 
-            button(type="submit") Comment
-            
-          //- Display all comments
+          form(method="post" action="/video/addcomment/#{mainVideo._id}")
+            .form-group
+              a(href="#").user
+                if user
+                  img(src="/#{user.profileImage}")  
+                if !user
+                  img(src="/uploads/default.jpg")  
+              textarea(name="comment_body" placeholder="Add a public comment...")
+            .form-group.float-xs-right.col-xs-12 
+              button(type="submit").btn.btn-secondary.btn-sm Comment
+              hr
+              
+            //- Display all comments
           each comment, i in mainVideo.comments.reverse()
             div.comment-container.py-2.px-1
               //- a(href="/#{comment}") profile page
@@ -58,7 +60,7 @@ block content
               span #{comment.comment_date.toDateString().slice(3).replace(' 201', ', 201')}
             p.py-1.px-1 #{comment.comment_body}
               hr
-            
+          
       
       
       //- Public video column

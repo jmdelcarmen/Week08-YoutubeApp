@@ -51,3 +51,22 @@ module.exports.addcomment = (req, res) => {
     res.redirect('/users/login');
   }
 }
+
+
+module.exports.addToFavorites = (req, res) => {
+//fetch video and add a like
+  Video.findOne({_id: req.params.id}, (err, video) => {
+    if (err) {
+      req.flash('error', 'Failed to like video.');
+    }
+    if (video.liked_users.indexOf(req.user.username) === -1) {
+      video.likes ++;
+      video.liked_users.push(req.user.username);
+      video.save();
+    } else {
+      req.flash('info', 'You already like this video');
+    }
+    res.redirect(`/video/${req.params.id}`);
+    // console.log(video);
+  });
+}

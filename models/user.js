@@ -27,7 +27,10 @@ let userSchema = new mongoose.Schema({
   //video objects
   videoUploads: {type: Array},
   //path to videos
-  favorites: {type: Array}
+  favorites: [{
+    video_title: {type: String},
+    video_url: {type: String, unique: true}
+  }]
 });
 
 module.exports = mongoose.model('User', userSchema);

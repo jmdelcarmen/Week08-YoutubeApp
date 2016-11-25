@@ -19,7 +19,8 @@ let videoSchema = mongoose.Schema({
     comment_date: {type: Date, default: Date.now}
   }],
   views: {type: Number, default: 0},
-  likes: {type: Number, default: 0}
+  likes: {type: Number, default: 0},
+  liked_users: {type: Array, unique: true}
 });
 
 module.exports = mongoose.model('Video', videoSchema);

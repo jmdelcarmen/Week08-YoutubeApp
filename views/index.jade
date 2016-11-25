@@ -1,22 +1,18 @@
 extends layout
 
 block content
-  h1.text-xs-center.text-primary.py-3= title
-  if user
-    p= user
-    img(src="#{user.profileImage}" width="200px" height=" 200px")
-  
-  div.container.col-xs-8
+  //- h1.text-xs-center.text-primary.py-3= title
+  //- if user
+  //-   p= user
+  //-   img(src="#{user.profileImage}" width="200px" height=" 200px")
+  div#landing-videos
     each video, i in videos
-      div.col-xs-4.my-2 
-        h4 #{video.title}
-        p #{video.desc}
-        a(href="/video/#{video._id}") 
-          video(width="300px" height="250px")
+      section
+        a(href="/video/#{video._id}")     
+          video(width="200px")
             source(src="#{video.url}")
-        div.text-xs-center  
-          span Likes: #{video.likes}
-          span Views: #{video.views}
-        div Published: 
-          span #{video.published_at.toDateString()}
+        div.info-overlay      
+          span #{video.title}
+          //- div Published: 
+            //- span #{video.published_at.toDateString()}
       //- #{video}
