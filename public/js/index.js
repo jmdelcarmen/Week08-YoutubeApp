@@ -23,7 +23,7 @@ $('#upload').on('click', function (e) {
       console.log('Data sent to server');
     }
   });
-
+  
   window.location.href = '/';
 
 });
