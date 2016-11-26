@@ -17,7 +17,8 @@ module.exports.uploadVideo = (req, res) => {
       profileImage: req.user.profileImage
     },
     published_at: req.body.published_at
-  }).save((e) => {
+  })
+  .save((e) => {
     if(e) {
       req.flash('error', 'Failed to upload video.');
       res.redirect('/users/upload');

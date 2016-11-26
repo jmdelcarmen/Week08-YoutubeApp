@@ -19,24 +19,11 @@ $('#upload').on('click', function (e) {
     type: 'POST',
     data: videoData,
     dataType: 'json',
-    success: function () {
-      console.log('Data sent to server');
+    success: function (message) {
+      console.log(message);
     }
   });
-  
+
   window.location.href = '/';
 
 });
-
-//
-// function saveFile (dataObject) {
-//   $.ajax({
-//     url: '/video/upload',
-//     type: 'POST',
-//     data: dataObject,
-//     dataType: 'json',
-//     success: function () {
-//       console.log('hi');
-//     }
-//   })
-// }
