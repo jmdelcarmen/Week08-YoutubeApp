@@ -27,3 +27,12 @@ module.exports.uploadVideo = (req, res) => {
     }
   });
 }
+
+module.exports.displayResults = (req, res) => {
+  Video.find({title: {$regex: req.body.search, $options: 'ig'}}, (err, videos) => {
+    req.flash('info', 'Search results: ' + videos.length);
+    res.render('index', {
+      videos: videos
+    });
+  })
+}

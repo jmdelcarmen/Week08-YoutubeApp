@@ -1,10 +1,6 @@
 extends layout
 
 block content
-  //- h1.text-xs-center.text-primary.py-3= title
-  //- if user
-  //-   p= user
-  //-   img(src="#{user.profileImage}" width="200px" height=" 200px")
   div#landing-videos
     each video, i in videos
       section
@@ -13,6 +9,3 @@ block content
             source(src="#{video.url}")
         div.info-overlay      
           span #{video.title}
-          //- div Published: 
-            //- span #{video.published_at.toDateString()}
-      //- #{video}

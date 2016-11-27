@@ -13,7 +13,7 @@ html
       a.navbar-brand(href='/')
         img.yt-logo(src="https://www.youtube.com/yt/brand/media/image/YouTube-logo-full_color.png")
       
-      form(method="post" action="search")
+      form(method="post" action="/videos/search")
         input(type="text" name="search" placeholder="Search")
         button(type="submit")
           i.fa.fa-search
@@ -28,7 +28,7 @@ html
             
       if user
         ul.yt-user
-          li.upload    
+          li.upload
             a(href="/videos/upload") Upload 
           li.logout
             a(href="/users/logout") Logout    
