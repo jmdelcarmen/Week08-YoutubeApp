@@ -12,7 +12,7 @@ block content
       textarea.form-control(id="videoDesc" required)
     .form-group
       label Upload video
-      input(type='filepicker', data-fp-apikey='AidhEA8EOS6RJEFfygsngz', onchange='getUploadData(event.fpfile)')
+      input(type='filepicker', data-fp-apikey='#{key}', onchange='getUploadData(event.fpfile)')
     .form-group  
       label Category
       select.form-control

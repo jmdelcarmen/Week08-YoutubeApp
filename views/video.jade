@@ -4,8 +4,9 @@ block content
     //- Main video column
     div.col-lg-8.primary-video-col.mt-2
       div#featured
-        video(controls width="100%")
-          source(src="#{mainVideo.url}")
+        video.video-js.vjs-16-9.vjs-default-skin.vjs-big-play-centered(controls='', preload='auto', width="100%", height="auto", data-setup='{"fluid": true}')
+          source(src='#{mainVideo.url}', type='video/mp4')
+          source(src='#{mainVideo.url}', type='video/webm')
         
       div#videoBar.mt-2
         h3.my-2 #{mainVideo.title}

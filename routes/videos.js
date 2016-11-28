@@ -3,7 +3,7 @@
 const Video = require('../models/video');
 
 module.exports.displayUpload = (req, res) => {
-  res.render('user/upload');
+  res.render('user/upload', {key: process.env.FILESTACK_KEY});
 }
 
 module.exports.uploadVideo = (req, res) => {

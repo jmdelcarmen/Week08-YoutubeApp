@@ -30,7 +30,6 @@ a, a:hover {
 
 
 
-
 /*MAIN NAVBAR*/
 .navbar {
   top: 0;
@@ -186,6 +185,7 @@ a, a:hover {
 .primary-video-col #featured {
   display: inline-block;
   text-align: center;
+  width: 100%;
 }
 
 #videoBar, #videoBar2, #commentsBar, #featured {
@@ -260,9 +260,30 @@ a, a:hover {
 }
 
 
+/**************VJS CUSTOMIZE*****************/
+/*
+.video-js {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
 
+.video-js .vjs-big-play-button {
+  color: #df2d28;
+  font-size: 4em;
+  border: 2px solid #df2d28;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+}
 
+.video-js:hover .vjs-big-play-button,
+.video-js .vjs-big-play-button:hover {
+  color: #fff;
+  border: 2px solid #fff;
+  background: #df2d28;
+}
 
+.vjs-control-bar {
+
+}*/
 
 
 
