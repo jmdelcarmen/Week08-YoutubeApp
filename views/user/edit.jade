@@ -2,7 +2,8 @@ extends ../layout
 
 block content
   hr.mt-3
-  form.container(method="post" action="/videos/edit/#{video._id}")
+  form.form-container(method="post" action="/videos/edit/#{video._id}")
+    h1.text-xs-center.my-2 Edit Video
     .form-group
       label Title
       input.form-control(name="title" type="text" id="videoTitle" required value="#{video.title}")
@@ -11,8 +12,20 @@ block content
       textarea.form-control(id="videoDesc" name="desc" required) #{video.desc}
     .form-group
       label Category
-      select.form-control(value="#{video.category}" name="category")
-        option(value="Option1") Option1
-        option(value="Option2") Option2
-        option(value="Option3") Option3
-    button.btn.btn-block.btn-info.form-control(type="submit") Edit
+      select.form-control(name="category")
+        option(value="Film & Animation") Film & Animation
+        option(value="Cars & Vehicles") Cars & Vehicles
+        option(value="Music") Music
+        option(value="Pets & Animals") Pets & Animals
+        option(value="Sports") Sports
+        option(value="Travel & Events") Travel & Events
+        option(value="Gaming") Gaming
+        option(value="People & Blogs") People & Blogs
+        option(value="Comedy") Comedy
+        option(value="Entertainment") Entertainment
+        option(value="News & Politics") News & Politics
+        option(value="How-to & Style") How-to & Style
+        option(value="Education") Education
+        option(value="Science & Technology") Science & Technology
+        option(value="Non-profits & Activism") Music
+    button.btn.btn-block.btn-info.form-control(type="submit") Save changes

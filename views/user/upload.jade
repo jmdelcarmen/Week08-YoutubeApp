@@ -1,14 +1,34 @@
 extends ../layout
 
 block content
-  hr.mt-3
-  form#uploadVideo
-    label Title
-    input(name="title" type="text" id="videoTitle" required)
-    textarea(id="videoDesc" required)
-    input(type='filepicker', data-fp-apikey='AidhEA8EOS6RJEFfygsngz', onchange='getUploadData(event.fpfile)')
-    select
-      option(value="Option1") Option1
-      option(value="Option2") Option2
-      option(value="Option3") Option3
-    button(type="submit" id="upload") Upload
+
+  form#uploadVideo.form-container.mt-3
+    h1.text-xs-center.my-2 Upload Video
+    .form-group
+      label Title
+      input.form-control(name="title" type="text" id="videoTitle" required)
+    .form-group
+      label Description
+      textarea.form-control(id="videoDesc" required)
+    .form-group
+      label Upload video
+      input(type='filepicker', data-fp-apikey='AidhEA8EOS6RJEFfygsngz', onchange='getUploadData(event.fpfile)')
+    .form-group  
+      label Category
+      select.form-control
+        option(value="Film & Animation") Film & Animation
+        option(value="Cars & Vehicles") Cars & Vehicles
+        option(value="Music") Music
+        option(value="Pets & Animals") Pets & Animals
+        option(value="Sports") Sports
+        option(value="Travel & Events") Travel & Events
+        option(value="Gaming") Gaming
+        option(value="People & Blogs") People & Blogs
+        option(value="Comedy") Comedy
+        option(value="Entertainment") Entertainment
+        option(value="News & Politics") News & Politics
+        option(value="How-to & Style") How-to & Style
+        option(value="Education") Education
+        option(value="Science & Technology") Science & Technology
+        option(value="Non-profits & Activism") Music
+    button.btn.btn-block.btn-primary(type="submit" id="upload") Upload

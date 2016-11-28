@@ -93,6 +93,7 @@ app.get('/users/logout', users.logoutUser);
 app.post('/videos/search', videos.displayResults);
 app.get('/videos/edit/:id', passport_config.ensureAuthenticated, videos.editVideo)
 app.post('/videos/edit/:id', passport_config.ensureAuthenticated, videos.saveEditedVideo)
+app.get('/videos/delete/:id', passport_config.ensureAuthenticated, videos.deleteVideo)
 app.get('/videos/upload', passport_config.ensureAuthenticated, videos.displayUpload);
 app.post('/videos/upload', passport_config.ensureAuthenticated, videos.uploadVideo);
 

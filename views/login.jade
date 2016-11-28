@@ -1,10 +1,9 @@
 extends layout
 
 block content
-  h2.page-header Login
-  p Please login below
   
-  form(method="post" action="/users/login")
+  form(method="post" action="/users/login").form-container.mt-2
+    h1.text-xs-center.my-2 Login
     .form-group
       label Username
       input(type="text" placeholder="Enter username" name="username" class="form-control" autofocus)
