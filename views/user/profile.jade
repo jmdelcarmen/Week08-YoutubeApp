@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  .uploads.container
+    h3 Uploads
+    table.table
+      thead
+        tr
+          th Title
+          th Category
+          th Views
+          th Likes
+          th
+          th
+      tbody
+        each video, i in videos
+          tr
+            td 
+              a(href="/video/#{video._id}") #{video.title}
+            td #{video.category}
+            td #{video.views}
+            td #{video.likes}
+            td
+              a(href="").btn.text-success Edit
+            td
+              a(href="").btn.text-danger Delete
+  

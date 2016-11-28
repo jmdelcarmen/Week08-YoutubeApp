@@ -86,6 +86,7 @@ app.get('/users/login', users.displayLogin);
 app.post('/users/login', passport.authenticate('local', {failureRedirect: '/users/login', failureFlash: 'Invalid Username or Password'}), users.loginUser);
 app.get('/users/register', users.displayRegister);
 app.post('/users/register', users.registerUser);
+app.get('/users/userprofile/', users.displayUserProfile);
 app.get('/users/logout', users.logoutUser);
 app.post('/videos/search', videos.displayResults);
 app.get('/videos/upload', passport_config.ensureAuthenticated, videos.displayUpload);
