@@ -42,7 +42,6 @@ module.exports.addcomment = (req, res) => {
       if (err) {
         res.status(500).send('Failed to add comment');
       }
-      req.flash('success', 'Comment added');
       res.redirect(`/video/${req.params.id}`);
     });
   } else {
