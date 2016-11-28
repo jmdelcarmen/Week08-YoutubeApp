@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .uploads.container
-    h3 Uploads
+    h3.mt-3 Uploads
     table.table
       thead
         tr
@@ -21,7 +21,7 @@ block content
             td #{video.views}
             td #{video.likes}
             td
-              a(href="").btn.text-success Edit
+              a(href="/videos/edit/#{video._id}").btn.text-success Edit
             td
-              a(href="").btn.text-danger Delete
+              a(href="/videos/delete/#{video._id}").btn.text-danger Delete
   

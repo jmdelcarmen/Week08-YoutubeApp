@@ -82,13 +82,17 @@ app.get('/', routes.dashboard);
 app.get('/video/:id', routes.displayVideo);
 app.get('/video/like/:id', passport_config.ensureAuthenticated, routes.likeVideo);
 app.post('/video/addcomment/:id', routes.addcomment);
+
 app.get('/users/login', users.displayLogin);
 app.post('/users/login', passport.authenticate('local', {failureRedirect: '/users/login', failureFlash: 'Invalid Username or Password'}), users.loginUser);
 app.get('/users/register', users.displayRegister);
 app.post('/users/register', users.registerUser);
-app.get('/users/userprofile/', users.displayUserProfile);
+app.get('/users/userprofile', passport_config.ensureAuthenticated, users.displayUserProfile);
 app.get('/users/logout', users.logoutUser);
+
 app.post('/videos/search', videos.displayResults);
+app.get('/videos/edit/:id', passport_config.ensureAuthenticated, videos.editVideo)
+app.post('/videos/edit/:id', passport_config.ensureAuthenticated, videos.saveEditedVideo)
 app.get('/videos/upload', passport_config.ensureAuthenticated, videos.displayUpload);
 app.post('/videos/upload', passport_config.ensureAuthenticated, videos.uploadVideo);
 

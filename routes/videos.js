@@ -28,6 +28,16 @@ module.exports.uploadVideo = (req, res) => {
   });
 }
 
+module.exports.editVideo = (req, res) => {
+  Video.findById(req.params.id, (err, video) => {
+    if (err) {
+      req.flash('err', 'Failed to find video.');
+      res.redirect(`/users/userprofile/${req.user._id}`);
+    }
+    res.render('user/edit', {video: video});
+  })
+}
+
 module.exports.displayResults = (req, res) => {
   Video.find({title: {$regex: req.body.search, $options: 'ig'}}, (err, videos) => {
     req.flash('info', 'Search results: ' + videos.length);
@@ -35,4 +45,19 @@ module.exports.displayResults = (req, res) => {
       videos: videos
     });
   })
+}
+
+module.exports.saveEditedVideo = (req, res) => {
+  Video.findOne({_id: req.params.id}, (err, video) => {
+    if (err) {
+      req.flash('err', 'Failed to save changes.');
+      res.redirect(`/users/userprofile/${req.user._id}`);
+    }
+
+    video.title = req.body.title;
+    video.desc = req.body.desc;
+    video.category = req.body.category;
+    video.save();
+    console.log(video);
+  });
 }

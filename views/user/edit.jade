@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+  hr.mt-3
+  form.container(method="post" action="/videos/edit/#{video._id}")
+    .form-group
+      label Title
+      input.form-control(name="title" type="text" id="videoTitle" required value="#{video.title}")
+    .form-group
+      label Description
+      textarea.form-control(id="videoDesc" name="desc" required) #{video.desc}
+    .form-group
+      label Category
+      select.form-control(value="#{video.category}" name="category")
+        option(value="Option1") Option1
+        option(value="Option2") Option2
+        option(value="Option3") Option3
+    button.btn.btn-block.btn-info.form-control(type="submit") Edit
