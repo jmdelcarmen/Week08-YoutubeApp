@@ -161,20 +161,38 @@ a, a:hover {
   height: 50px;
   border-radius: 50%;
   border: 2px solid rgba(0, 0, 0, 0.15);
+  transition: .3s all;
+}
+
+.user img:hover {
+  border: 2px solid #df2d28;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
 
 /********LANDING PAGE********/
 #landing-videos {
-  background: #393939;
+  border-top: 5px solid #df2d28;
+  border-bottom: 5px solid #df2d28;
+  margin-top: 100px;
+  background: #dfdfdf;
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 50px 0;
 }
 
 #landing-videos section {
-  width: 25%;
+  margin: 1% 0;
+  float: left;
+  max-width: 340px;
   background: #000;
   position: relative;
+  transition: .4s;
+}
+
+#landing-videos section:hover {
+  transform: scale(1.05);
 }
 
 #landing-videos section video {
@@ -277,40 +295,6 @@ a, a:hover {
   align-self: flex-start;
   display: block;
 }
-
-
-/**************VJS CUSTOMIZE*****************/
-/*
-.video-js {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-}
-
-.video-js .vjs-big-play-button {
-  color: #df2d28;
-  font-size: 4em;
-  border: 2px solid #df2d28;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-}
-
-.video-js:hover .vjs-big-play-button,
-.video-js .vjs-big-play-button:hover {
-  color: #fff;
-  border: 2px solid #fff;
-  background: #df2d28;
-}
-
-.vjs-control-bar {
-
-}*/
-
-
-
-
-
-
-
-
 
 
 
