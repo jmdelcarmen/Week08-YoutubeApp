@@ -1,7 +1,11 @@
 extends layout
 
 block content
-  div#landing-videos
+
+  div#category-sidebar.col-lg-3
+
+  
+  div#landing-videos.col-lg-8
     each video, i in videos
       section
         a(href="/video/#{video._id}")     
@@ -9,3 +13,5 @@ block content
             source(src="#{video.url}")
         div.info-overlay      
           span #{video.title}
+          
+  
