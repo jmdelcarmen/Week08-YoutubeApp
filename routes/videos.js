@@ -62,6 +62,7 @@ module.exports.saveEditedVideo = (req, res) => {
         res.redirect('/users/userprofile');
         req.flash('err', 'Failed to save changes.');
       }
+      console.log(video);
     });
   });
   req.flash('success', 'Video edited');
