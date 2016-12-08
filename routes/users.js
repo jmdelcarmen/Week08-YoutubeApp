@@ -5,6 +5,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 const Video = require('../models/video');
+const q = require('q');
 
 module.exports.displayLogin = (req, res) => {
   res.render('login', {title: 'Login'});
@@ -67,13 +68,15 @@ module.exports.registerUser = (req, res) => {
 }
 
 module.exports.displayUserProfile = (req, res) => {
-  //search user's videos
-  Video.find({"publisher.username": req.user.username}, (err, videos) => {
-    if (err) {
+  //queries
+  const userQ = Video.find({"publisher.username": req.user.username}).exec();
+
+  q.all([userQ])
+    .then(videos => {
+      res.render('user/profile', {videos: videos[0]});
+    })
+    .catch(err => {
       req.flash('error', 'Failed to load user profile');
       res.redirect('/');
-    }
-    // res.json({videos: videos});
-    res.render('user/profile', {videos: videos});
-  });
+    });
 }

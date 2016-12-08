@@ -4,7 +4,9 @@ block content
 
   div#category-sidebar.col-lg-2
     each category, i in categories
-      a(href="/category/#{category.name}") #{category.name}
+      a(href="/category/#{category.name}" class=category.name === title ? "active":"")
+        i.fa.fa-angle-right
+        | #{category.name}
 
   h2#category-header #{title}
   div#landing-videos.col-lg-10

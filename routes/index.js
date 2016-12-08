@@ -1,60 +1,70 @@
 'use strict';
 
-const User = require('../models/user');
 const Video = require('../models/video');
 const Category = require('../models/category');
+const q = require('q');
 
 //Display homepage
 module.exports.dashboard = (req, res) => {
-    Category.find({}, (err, categories) => {
-      Video.find({}, (err, videos) => {
-        if(err) req.flash('error', 'Could not load videos');
-        res.render('index', {
-          title: 'Featured',
-          videos: videos,
-          categories: categories
-        });
+  //queries
+  const categoryQ = Category.find().exec();
+  const videoQ = Video.find().exec();
+  q.all([categoryQ, videoQ])
+    .then(data => {
+      res.render('index', {
+        title: 'Featured',
+        videos: data[1],
+        categories: data[0]
       });
+    })
+    .catch(err => {
+      req.flash('error', 'Could not load videos');
     });
   }
 
 module.exports.showCategory = (req, res) => {
-  Category.find({}, (err, categories) => {
-    Video.find({category: req.params.category}, (err, videos) => {
-      if(err) req.flash('error', 'Could not load videos');
+  //queries
+  const categoryQ = Category.find().exec();
+  const videoQ = Video.find({category: req.params.category}).exec();
+  q.all([categoryQ, videoQ])
+    .then(data => {
       res.render('index', {
         title: req.params.category,
-        videos: videos,
-        categories: categories
+        videos: data[1],
+        categories: data[0]
       });
+    })
+    .catch(err => {
+      req.flash('error', 'Could not load videos');
     });
-  })
-}
+  }
 
 //Display main video
 module.exports.displayVideo = (req, res) => {
-  Video.findByIdAndUpdate(req.params.id, {$inc: {views: 1}}, (e, video) => {
-    if (e) console.log(e.message);
-    console.log('Video viewed.');
-  });
+  //queries
+  const addViewCount = Video.findByIdAndUpdate(req.params.id, {$inc: {views: 1}}).exec();
+  const mainVideoQ = Video.findById(req.params.id).exec();
+  const publicVideoQ = Video.find().exec();
 
-  let publicVideos = [];
-  //get all videos
-  Video.find({}, (err, videos) => {
-    if (err) req.flash('error', 'Fail to load videos.');
-    publicVideos = videos;
-    //get main video
-    Video.findById(req.params.id, (err, video) => {
-      if(err) req.flash('error', 'Fail to load video.');
+  q.all([addViewCount, mainVideoQ, publicVideoQ])
+    .then(data => {
+      console.log(data);
       res.render('video', {
-        mainVideo: video,
-        publicVideos: publicVideos,
+        mainVideo: data[1],
+        publicVideos: data[2],
         user: req.user
       });
+    })
+    .catch(err => {
+      req.flash('error', 'Fail to load video.');
     });
-  });
 }
 
+
+
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////Add Angular functionality here
+////////////////////////////////////////////////////
 module.exports.addcomment = (req, res) => {
   if (req.user) {
     Video.findOneAndUpdate({_id: req.params.id}, {$push: {comments: {comment_body: req.body.comment_body, comment_date: new Date(), username: req.user.username, profileImage: req.user.profileImage}}},(err, video) => {

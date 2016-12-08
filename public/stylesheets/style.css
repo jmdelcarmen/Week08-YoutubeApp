@@ -13,7 +13,7 @@ ul, ol {
   margin: 0;
 }
 
-a, a:hover {
+a, a:hover, a:focus {
   text-decoration: none;
   border: none;
 }
@@ -182,14 +182,35 @@ a, a:hover {
 
 #category-sidebar a {
   display: block;
-  padding: 7px 5px;
+  padding: 7px 35px;
   color: #444;
+  position: relative;
 }
 
-#category-sidebar a:hover {
-  color: #eee;
-  background: #444;
+#category-sidebar a i {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  font-size: 1.3em;
+  font-weight: 700;
+  display: none;
+  transform: translateX(20px);
 }
+
+#category-sidebar a:hover > i {
+  display: inline-block;
+}
+
+#category-sidebar a:hover, .active {
+  color: #fff !important;
+  background: #444;
+  font-weight: 500;
+}
+
+.active i {
+  display: inline-block !important;
+}
+
 
 #category-header {
  background: #df2d28;
@@ -205,7 +226,7 @@ a, a:hover {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  padding: 0;
+  padding: 0 5px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
