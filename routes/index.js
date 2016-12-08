@@ -48,16 +48,29 @@ module.exports.displayVideo = (req, res) => {
 
   q.all([addViewCount, mainVideoQ, publicVideoQ])
     .then(data => {
-      console.log(data);
       res.render('video', {
         mainVideo: data[1],
         publicVideos: data[2],
         user: req.user
       });
+      res.json(data)
     })
     .catch(err => {
       req.flash('error', 'Fail to load video.');
     });
+}
+
+module.exports.getComments = (req, res) => {
+  //queries
+  const commentsQ = Video.findById(req.params.id).exec();
+
+  q.all([commentsQ])
+    .then( video => {
+      res.json(video[0].comments);
+    })
+    .catch( err => {
+      req.flash('error', 'Fail to load video.');
+    })
 }
 
 
@@ -67,15 +80,20 @@ module.exports.displayVideo = (req, res) => {
 ////////////////////////////////////////////////////
 module.exports.addcomment = (req, res) => {
   if (req.user) {
-    Video.findOneAndUpdate({_id: req.params.id}, {$push: {comments: {comment_body: req.body.comment_body, comment_date: new Date(), username: req.user.username, profileImage: req.user.profileImage}}},(err, video) => {
+    Video.findOneAndUpdate({_id: req.body.id}, {$push: {comments: {comment_body: req.body.comment_body, comment_date: new Date(), username: req.user.username, profileImage: req.user.profileImage}}},(err, video) => {
       if (err) {
         res.status(500).send('Failed to add comment');
       }
-      res.redirect(`/video/${req.params.id}`);
+      res.json({
+        comment_body: req.body.comment_body,
+        username: req.user.username,
+        profileImage: req.user.profileImage,
+        comment_date: new Date()
+      });
     });
   } else {
     req.flash('error', 'Please sign in to leave a comment.');
-    res.redirect('/users/login');
+    res.status(400).send();
   }
 }
 

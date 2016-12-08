@@ -8,7 +8,7 @@ block content
         i.fa.fa-angle-right
         | #{category.name}
 
-  h2#category-header #{title}
+  h2#category-header #{title || "Results : " + videos.length}
   div#landing-videos.col-lg-10
     each video, i in videos
       section

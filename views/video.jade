@@ -4,7 +4,7 @@ block content
     //- Main video column
     div.col-lg-8.primary-video-col.mt-2
       div#featured
-        video.video-js.vjs-16-9.vjs-default-skin.vjs-big-play-centered(controls='', preload='auto', width="100%", height="auto", data-setup='{"fluid": true}')
+        video.video-js.vjs-16-9.vjs-default-skin.vjs-big-play-centered(controls='', preload='auto', width="100%", data-setup='{"fluid": true}')
           source(src='#{mainVideo.url}', type='video/mp4')
           source(src='#{mainVideo.url}', type='video/webm')
         
@@ -34,31 +34,31 @@ block content
       
       //- Comments section
       div#commentsBar.my-2
-        span.lead.pl-2 Comments - #{mainVideo.comments.length}
+        span.lead.pl-2 Comments - {{comments.length}}
         hr
         //do some angular stuff for adding comments
         div.row
-          form(method="post" action="/video/addcomment/#{mainVideo._id}")
+          //- form(method="post" action="/video/addcomment/#{mainVideo._id}")
+          form(ng-submit="addComment('/video/addcomment/#{mainVideo._id}')")
             .form-group
               a(href="#").user
                 if user
                   img(src="/#{user.profileImage}")  
                 if !user
                   img(src="/uploads/default.jpg")  
-              textarea(name="comment_body" placeholder="Add a public comment...")
+              textarea(ng-model="comment_body" placeholder="Add a public comment..." required)
             .form-group.float-xs-right.col-xs-12 
-              button(type="submit").btn.btn-secondary.btn-sm Comment
+              button.btn.btn-secondary.btn-sm Comment
               hr
               
-            //- Display all comments
-          each comment, i in mainVideo.comments.reverse()
+          div(ng-repeat="comment in comments")
             div.comment-container.py-2.px-1
               //- a(href="/#{comment}") profile page
-              img(src="/#{comment.profileImage}")
+              img(ng-src="/{{comment.profileImage}}")
               strong.mx-1
-                span#comment-username #{comment.username}
-              span #{comment.comment_date.toDateString().slice(3).replace(' 201', ', 201')}
-            p.py-1.px-1 #{comment.comment_body}
+                span#comment-username {{comment.username}} 
+              span {{comment.comment_date | date : format : timezone}}
+            p.py-1.px-1 {{comment.comment_body}}
               hr
           
       //- Public video column

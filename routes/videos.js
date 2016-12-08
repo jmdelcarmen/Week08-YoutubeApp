@@ -53,7 +53,6 @@ module.exports.displayResults = (req, res) => {
 
   q.all([videosQ, categoryQ])
     .then(data => {
-      req.flash('info', 'Search results: ' + data[0].length);
       res.render('index', {
         videos: data[0],
         categories: data[1]

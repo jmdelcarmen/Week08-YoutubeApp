@@ -81,6 +81,7 @@ app.get('*', (req, res, next) => {
 
 
 app.get('/', routes.dashboard);
+app.get('/api/getcomments/:id', routes.getComments);
 app.get('/category/:category', routes.showCategory);
 app.get('/video/:id', routes.displayVideo);
 app.get('/video/like/:id', passportConfig.ensureAuthenticated, routes.likeVideo);
