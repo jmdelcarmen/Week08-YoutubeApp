@@ -1,15 +1,34 @@
+'use strict';
+
 const User = require('../models/user');
 const Video = require('../models/video');
+const Category = require('../models/category');
 
 //Display homepage
 module.exports.dashboard = (req, res) => {
-  Video.find({}, (e, videos) => {
-    if(e) req.flash('error', 'Could not load videos');
-    res.render('index', {
-      title: 'Dashboard',
-      videos: videos
+    Category.find({}, (err, categories) => {
+      Video.find({}, (err, videos) => {
+        if(err) req.flash('error', 'Could not load videos');
+        res.render('index', {
+          title: 'Featured',
+          videos: videos,
+          categories: categories
+        });
+      });
     });
-  });
+  }
+
+module.exports.showCategory = (req, res) => {
+  Category.find({}, (err, categories) => {
+    Video.find({category: req.params.category}, (err, videos) => {
+      if(err) req.flash('error', 'Could not load videos');
+      res.render('index', {
+        title: req.params.category,
+        videos: videos,
+        categories: categories
+      });
+    });
+  })
 }
 
 //Display main video

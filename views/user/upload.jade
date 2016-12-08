@@ -16,19 +16,6 @@ block content
     .form-group  
       label Category
       select.form-control
-        option(value="Film & Animation") Film & Animation
-        option(value="Cars & Vehicles") Cars & Vehicles
-        option(value="Music") Music
-        option(value="Pets & Animals") Pets & Animals
-        option(value="Sports") Sports
-        option(value="Travel & Events") Travel & Events
-        option(value="Gaming") Gaming
-        option(value="People & Blogs") People & Blogs
-        option(value="Comedy") Comedy
-        option(value="Entertainment") Entertainment
-        option(value="News & Politics") News & Politics
-        option(value="How-to & Style") How-to & Style
-        option(value="Education") Education
-        option(value="Science & Technology") Science & Technology
-        option(value="Non-profits & Activism") Music
+        each category, i in categories
+          option(value="#{category.name}") #{category.name}
     button.btn.btn-block.btn-primary(type="submit" id="upload") Upload

@@ -9,7 +9,7 @@ const expressValidator = require('express-validator');
 const session = require('express-session');
 const passport = require('passport');
 const flash = require('connect-flash');
-const passport_config = require('./routes/passport_config');
+const passportConfig = require('./routes/passport_config');
 //file upload
 const multer = require('multer');
 //db stuff
@@ -24,6 +24,8 @@ const videos = require('./routes/videos');
 
 //initialize app
 const app = express();
+const port = process.env.PORT || 3000;
+const Category = require('./models/category');
 
 // view engine setup
 app.set('view engine', 'jade');
@@ -47,7 +49,7 @@ app.use(passport.session());
 //passport configuration
 //serializeUser
 //deserializeUser
-passport_config();
+passportConfig();
 // validator
 app.use(expressValidator({
   errorFormatter: (param, msg, value) => {
@@ -79,23 +81,24 @@ app.get('*', (req, res, next) => {
 
 
 app.get('/', routes.dashboard);
+app.get('/category/:category', routes.showCategory);
 app.get('/video/:id', routes.displayVideo);
-app.get('/video/like/:id', passport_config.ensureAuthenticated, routes.likeVideo);
+app.get('/video/like/:id', passportConfig.ensureAuthenticated, routes.likeVideo);
 app.post('/video/addcomment/:id', routes.addcomment);
 
 app.get('/users/login', users.displayLogin);
 app.post('/users/login', passport.authenticate('local', {failureRedirect: '/users/login', failureFlash: 'Invalid Username or Password'}), users.loginUser);
 app.get('/users/register', users.displayRegister);
 app.post('/users/register', users.registerUser);
-app.get('/users/userprofile', passport_config.ensureAuthenticated, users.displayUserProfile);
+app.get('/users/userprofile', passportConfig.ensureAuthenticated, users.displayUserProfile);
 app.get('/users/logout', users.logoutUser);
 
 app.post('/videos/search', videos.displayResults);
-app.get('/videos/edit/:id', passport_config.ensureAuthenticated, videos.editVideo)
-app.post('/videos/edit/:id', passport_config.ensureAuthenticated, videos.saveEditedVideo)
-app.get('/videos/delete/:id', passport_config.ensureAuthenticated, videos.deleteVideo)
-app.get('/videos/upload', passport_config.ensureAuthenticated, videos.displayUpload);
-app.post('/videos/upload', passport_config.ensureAuthenticated, videos.uploadVideo);
+app.get('/videos/edit/:id', passportConfig.ensureAuthenticated, videos.editVideo)
+app.post('/videos/edit/:id', passportConfig.ensureAuthenticated, videos.saveEditedVideo)
+app.get('/videos/delete/:id', passportConfig.ensureAuthenticated, videos.deleteVideo)
+app.get('/videos/upload', passportConfig.ensureAuthenticated, videos.displayUpload);
+app.post('/videos/upload', passportConfig.ensureAuthenticated, videos.uploadVideo);
 
 
 // catch 404 and forward to error handler
@@ -130,5 +133,6 @@ app.use((err, req, res, next) => {
 });
 
 
-console.log('Wooo! Here we go!....');
-module.exports = app;
+app.listen(port, () => {
+  console.log('Wooo! Here we go!....');
+});

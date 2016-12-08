@@ -175,28 +175,44 @@ a, a:hover {
 #category-sidebar {
   background: #fff;
   height: 700px;
-  width: 300px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  padding: 0;
 }
 
+#category-sidebar a {
+  display: block;
+  padding: 7px 5px;
+  color: #444;
+}
 
+#category-sidebar a:hover {
+  color: #eee;
+  background: #444;
+}
+
+#category-header {
+ background: #df2d28;
+ color: white;
+ text-align: center;
+ padding: .5em 0;
+ font-size: 2.3em;
+ margin: 0;
+}
 
 #landing-videos {
-  /*border-top: 5px solid #df2d28;
-  border-bottom: 5px solid #df2d28;*/
-  margin: 2% 0 2% 7.5%;
   background: #fff;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  padding: 50px 10px;
+  padding: 0;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
 #landing-videos section {
-  margin: 1% 0;
+  margin: 0;
   float: left;
-  max-width: 180px;
+  width: 25%;
   background: #000;
   position: relative;
   transition: .4s;

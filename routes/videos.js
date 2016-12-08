@@ -1,9 +1,18 @@
 'use strict';
 
 const Video = require('../models/video');
+const Category = require('../models/category');
 
 module.exports.displayUpload = (req, res) => {
-  res.render('user/upload', {key: process.env.FILESTACK_KEY});
+  Category.find({}, (err, categories) => {
+    if (err) {
+      res.status(500).send('Failed to load video categories.');
+    }
+    res.render('user/upload', {
+      key: process.env.FILESTACK_KEY,
+      categories: categories
+    });
+  })
 }
 
 module.exports.uploadVideo = (req, res) => {
@@ -39,12 +48,20 @@ module.exports.displayResults = (req, res) => {
 }
 
 module.exports.editVideo = (req, res) => {
-  Video.findById(req.params.id, (err, video) => {
+  Category.find({}, (err, categories) => {
     if (err) {
-      req.flash('err', 'Failed to find video.');
-      res.redirect(`/users/userprofile/${req.user._id}`);
+      res.status(500).send('Failed to load video categories.');
     }
-    res.render('user/edit', {video: video});
+    Video.findById(req.params.id, (err, video) => {
+      if (err) {
+        req.flash('err', 'Failed to find video.');
+        res.redirect(`/users/userprofile/${req.user._id}`);
+      }
+      res.render('user/edit', {
+        video: video,
+        categories: categories
+      });
+    });
   })
 }
 
