@@ -8,7 +8,7 @@ const q = require('q');
 module.exports.dashboard = (req, res) => {
   //queries
   const categoryQ = Category.find().exec();
-  const videoQ = Video.find().exec();
+  const videoQ = Video.find({}, {title: true, url:true}).exec();
   q.all([categoryQ, videoQ])
     .then(data => {
       res.render('index', {
@@ -44,9 +44,9 @@ module.exports.displayVideo = (req, res) => {
   //queries
   const addViewCount = Video.findByIdAndUpdate(req.params.id, {$inc: {views: 1}}).exec();
   const mainVideoQ = Video.findById(req.params.id).exec();
-  const publicVideoQ = Video.find().exec();
+  const publicVideosQ = Video.find({}, {url: true, title: true, views: true}).exec();
 
-  q.all([addViewCount, mainVideoQ, publicVideoQ])
+  q.all([addViewCount, mainVideoQ, publicVideosQ])
     .then(data => {
       res.render('video', {
         mainVideo: data[1],
@@ -58,7 +58,7 @@ module.exports.displayVideo = (req, res) => {
     .catch(err => {
       req.flash('error', 'Fail to load video.');
     });
-}
+  }
 
 module.exports.getComments = (req, res) => {
   //queries
@@ -70,8 +70,8 @@ module.exports.getComments = (req, res) => {
     })
     .catch( err => {
       req.flash('error', 'Fail to load video.');
-    })
-}
+    });
+  }
 
 
 

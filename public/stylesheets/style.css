@@ -185,6 +185,7 @@ a, a:hover, a:focus {
   padding: 7px 35px;
   color: #444;
   position: relative;
+  font-size: 12px;
 }
 
 #category-sidebar a i {
