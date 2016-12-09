@@ -346,6 +346,20 @@ a, a:hover, a:focus {
 
 
 
+/*=============NG-ANIMATE=================*/
+.ng-enter {
+  transition: .6s all;
+  opacity: 0;
+  transform: translateX(20%);
+}
+
+.ng-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+
 ul.success li {
   padding: 15px;
   margin-bottom: 20px;

@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  angular.module('vload', [])
+  angular.module('vload', ['ngAnimate'])
     .controller('mainCtrl', ['$scope', '$http', function ($scope, $http) {
 
       //add comment to main video
