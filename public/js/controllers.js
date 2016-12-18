@@ -42,19 +42,5 @@
         });
       }
 
-
-
-    }])
+    }]) //mainCtrl
 }());
-
-
-// //- Display all comments
-// each comment, i in mainVideo.comments.reverse()
-// div.comment-container.py-2.px-1
-//   //- a(href="/#{comment}") profile page
-//   img(src="/#{comment.profileImage}")
-//   strong.mx-1
-//     span#comment-username #{comment.username}
-//   span #{comment.comment_date.toDateString().slice(3).replace(' 201', ', 201')}
-// p.py-1.px-1 #{comment.comment_body}
-//   hr

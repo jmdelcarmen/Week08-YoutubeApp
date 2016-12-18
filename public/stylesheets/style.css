@@ -238,6 +238,7 @@ a, a:hover, a:focus {
   background: #000;
   position: relative;
   transition: .4s;
+  max-height: 100%;
 }
 
 #landing-videos section:hover {
@@ -246,6 +247,7 @@ a, a:hover, a:focus {
 
 #landing-videos section video {
   width: 100%;
+  max-height: 167px !important;
 }
 
 #landing-videos section .info-overlay {
@@ -334,10 +336,14 @@ a, a:hover, a:focus {
   display: flex;
   flex-flow: row;
   align-items: center;
+  max-height: 133px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 .secondary-video-col .publicvideo-container video {
   width: 225px;
+  max-height: 127px;
 }
 
 .secondary-video-col .publicvideo-container h4 {
